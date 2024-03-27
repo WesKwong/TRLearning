@@ -13,7 +13,7 @@ from utils.time import get_time_str
 from utils.misc import get_results_dir
 
 expt_time = get_time_str()
-results_path = get_results_dir(config.results_path, expt_time)
+results_path = get_results_dir(config.results_path, expt_time+'/')
 logger.add(results_path + f"{expt_time}.log")
 glob.set('results_path', results_path)
 glob.set('logger', logger)
