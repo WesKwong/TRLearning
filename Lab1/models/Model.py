@@ -1,5 +1,8 @@
+import utils.glob as glob
+logger = glob.get('logger')
+
 import numpy as np
-from collections import Counter, defaultdict
+from collections import Counter
 
 from tqdm import tqdm
 
@@ -41,8 +44,7 @@ class NGramModel:
         self.vocab_size = len(self.word_cnts)
 
     def perplexity(self, test_data):
-        perplexity = np.array([])
-
+        perplexity = []
         for sentence in test_data:
             sentence_prob = []
             for i in range(len(sentence) - self.N + 1):
@@ -51,8 +53,7 @@ class NGramModel:
             sentence_prob = np.array(sentence_prob)
             product = np.prod(sentence_prob)
             pp = product ** (-1 / len(sentence))
-            data_prob = np.append(data_prob, pp)
-        perplexity = np.mean(perplexity)
+            perplexity = np.append(perplexity, pp)
 
         return perplexity
 

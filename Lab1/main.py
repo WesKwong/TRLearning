@@ -4,6 +4,7 @@ logger = glob.get('logger')
 results_path = glob.get('results_path')
 config = glob.get('config')
 # --------------------------- - -------------------------- #
+import numpy as np
 
 from tools.data import NgramData
 from models.Model import NGramModel
@@ -23,11 +24,21 @@ def run_experiment(experiment):
 
         model = NGramModel(train_data, hp, setting)
 
-        logger.info(f"Perplexity Test1: {model.perplexity(test1_data)}")
-        logger.info(f"Perplexity Test2: {model.perplexity(test2_data)}")
+        pp1 = 'Fail'
+        try:
+            pp1 = model.perplexity(test1_data)
+            logger.info(f"Perplexity Test1: {np.median(pp1):.4f}")
+        except:
+            logger.error("Error in Perplexity Test1")
+        pp2 = 'Fail'
+        try:
+            pp2 = model.perplexity(test2_data)
+            logger.info(f"Perplexity Test2: {np.median(pp2):.4f}")
+        except:
+            logger.error("Error in Perplexity Test2")
         setting.log({
-            'perplexity_test1': model.perplexity(test1_data),
-            'perplexity_test2': model.perplexity(test2_data),
+            'perplexity_test1': pp1,
+            'perplexity_test2': pp2,
         }, printout=False)
         setting.save_to_disc(results_path)
 
