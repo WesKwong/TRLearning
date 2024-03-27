@@ -24,16 +24,16 @@ def run_experiment(experiment):
 
         model = NGramModel(train_data, hp, setting)
 
-        pp1 = 'Fail'
+        pp1 = ['Fail']
         try:
             pp1 = model.perplexity(test1_data)
-            logger.info(f"Perplexity Test1: {np.median(pp1):.4f}")
+            logger.info(f"Perplexity Test1: {np.mean(pp1):.4f}")
         except:
             logger.error("Error in Perplexity Test1")
-        pp2 = 'Fail'
+        pp2 = ['Fail']
         try:
             pp2 = model.perplexity(test2_data)
-            logger.info(f"Perplexity Test2: {np.median(pp2):.4f}")
+            logger.info(f"Perplexity Test2: {np.mean(pp2):.4f}")
         except:
             logger.error("Error in Perplexity Test2")
         setting.log({

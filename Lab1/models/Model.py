@@ -44,16 +44,16 @@ class NGramModel:
         self.vocab_size = len(self.word_cnts)
 
     def perplexity(self, test_data):
-        perplexity = []
+        perplexity_list = []
         for sentence in test_data:
-            sentence_prob = []
-            for i in range(len(sentence) - self.N + 1):
+            log_prob_sum = 0.0
+            total_ngram = len(sentence) - self.N + 1
+            for i in range(total_ngram):
                 ngram = tuple(sentence[i:i + self.N])
-                sentence_prob.append(self.estimator(ngram))
-            sentence_prob = np.array(sentence_prob)
-            product = np.prod(sentence_prob)
-            pp = product ** (-1 / len(sentence))
-            perplexity = np.append(perplexity, pp)
-
-        return perplexity
+                ngram_prob = self.estimator(ngram)
+                log_prob_sum += np.log(ngram_prob)
+            perplexity = np.exp(log_prob_sum * (-(1 / total_ngram)))
+            perplexity_list.append(perplexity)
+        perplexity_list = np.array(perplexity_list)
+        return perplexity_list
 

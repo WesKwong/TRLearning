@@ -64,15 +64,15 @@ class gt_smooth(ProbEstimator):
         # get dr
         Nr = Counter(cnts.values())
         dr = Counter()
-        k = threshold
-        for r in range(1, k+1):
+        T = threshold
+        for r in range(1, T+1):
             dr[r] = (r+1) * Nr[r+1] / Nr[r]
-            dr[r] -= r * (k+1) * Nr[k+1] / Nr[1]
-            dr[r] /= 1 - (k+1) * Nr[k+1] / Nr[1]
+            dr[r] -= r * (T+1) * Nr[T+1] / Nr[1]
+            dr[r] /= 1 - (T+1) * Nr[T+1] / Nr[1]
         # get new cnts
         new_cnts = copy.deepcopy(cnts)
         for key, value in new_cnts.items():
-            if value <= k:
+            if value <= T:
                 new_cnts[key] = dr[value]
         new_cnts['<Nr0>'] = Nr[1]
         return new_cnts
