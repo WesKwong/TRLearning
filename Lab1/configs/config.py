@@ -6,6 +6,7 @@ class Config():
         self.data_path = 'data/'
         self.results_path = 'results/'
         self.random_seed = 42
+        self.log_level = 'INFO'
 
         # ------------------ experiment settings ----------------- #
         # name: name of the setting
@@ -18,7 +19,7 @@ class Config():
         self.expt_settings.append(default_setting)
 
     def get_default_setting(self):
-        set = {'name': ['delault']}
+        set = {'name': ['default']}
         set['N'] = [2, 3]
         set['smooth'] = ['none', 'add1', 'gt']
         return set
