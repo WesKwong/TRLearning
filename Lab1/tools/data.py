@@ -35,9 +35,9 @@ class NgramData(MyData):
             sentences = f.readlines()
         data = []
         for sentence in sentences:
-            words = ['<BOS>']
+            words = ['<s>']
             words += sentence.strip().split(' ')
-            words += ['<EOS>']
+            words += ['</s>']
             data.append(words)
         if target == 'train':
             self.train_set = data
