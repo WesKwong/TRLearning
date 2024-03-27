@@ -70,7 +70,7 @@ class Experiment():
 
     def to_dict(self):
         # turns an experiment into a dict that can be saved to disc
-        expt_dict = {**self.hyperparameters,
+        expt_dict = {"hyperparameters": self.hyperparameters,
                      **self.results}
         return expt_dict
 
