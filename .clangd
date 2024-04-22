@@ -1,0 +1,10 @@
+Diagnostics:
+  UnusedIncludes: Strict
+Completion:
+  AllScopes: true
+CompileFlags:
+  CompilationDatabase: build
+Index:
+  Background: Build
+Hover:
+  ShowAKA: true
